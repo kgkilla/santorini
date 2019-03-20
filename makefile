@@ -7,10 +7,17 @@ SDIR=src
 # Compiler Options
 CC=g++
 CFLAGS=-I$(IDIR) -L$(LDIR) $(LIBS) -g
+#OSX
+CFLAGS+=-L/usr/X11/lib
 
 # Library includes
-LIBS  =-lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor
-LIBS +=-lrt -lm -pthread -ldl
+
+#OSX
+LIBS  =-lglfw3 -framework OpenGL -framework IOKit -framework CoreVideo -framework Cocoa -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor
+#Linux
+#LIBS  =-lrt -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor
+#All
+LIBS +=-lm -pthread -ldl
 
 # Dependencies and Objects lists
 _DEPS = glad.h shader.h stb_image.h camera.h board.h game_defs.h player.h tower.h
